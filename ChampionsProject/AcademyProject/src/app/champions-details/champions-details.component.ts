@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Days } from '../models/days';
+import { DayService } from '../services/day.service';
+import { Champions } from '../models/champions';
+
 
 @Component({
   selector: 'app-champions-details',
@@ -7,14 +10,14 @@ import { Days } from '../models/days';
   styleUrls: ['./champions-details.component.css']
 })
 export class ChampionsDetailsComponent implements OnInit {
-  champions : Days[] = null;
+  champions : Champions ;
   idSelected: number = null;
-  constructor() { }
+  constructor( private dayService : DayService) {
+
+  }
 
   ngOnInit() {
-    this.generateChampions(this.idSelected) // SERIEA ID;
+    //this.generateChampions() // SERIEA ID;
   }
-  generateChampions(id: number): void {
-    this.champions.push();
-  }
+
 }

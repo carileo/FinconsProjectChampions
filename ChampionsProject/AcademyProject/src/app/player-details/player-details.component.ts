@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../models/player';
 import { PlayerService } from '../services/player.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-player-details',
@@ -9,13 +10,19 @@ import { PlayerService } from '../services/player.service';
 })
 export class PlayerDetailsComponent implements OnInit {
   player : Player =null;
-  constructor(private playerService:PlayerService) { }
+  id: number;
+
+  constructor(private playerService:PlayerService , private route: ActivatedRoute) {
+    this.id = +this.route.snapshot.paramMap.get('playerid');
+    this.playerService.getPlayerInfo(this.id).pipe()
+    .subscribe(p=>{
+    this.player=p;
+  });
+  }
 
   ngOnInit() {
-    this.generatePlayer();
-  }
-  generatePlayer(): void {
-    this.player=this.playerService.generatePlayer();
+
 
   }
+
 }

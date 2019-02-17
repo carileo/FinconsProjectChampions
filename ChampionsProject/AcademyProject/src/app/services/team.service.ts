@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import {  map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { Team } from '../models/team';
-import { Player } from '../models/player';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
-  players: Player[] = null;
-  team:Team = new Team(1,"Catania","Cata","CTN","non lo so","www.catania.com","asdlfa","acehcn",1,"red-blue","CT Stadium",this.players);
+  constructor( private http:HttpClient) { }
 
-  constructor() { }
+  BASE_URL : string='https://api.football-data.org/v2/teams';
 
-  getTeam(){
-    //METODO GET PER OTTENERE LA SQUADRA DA VISUALIZZARE
+  getTeamInfo(id: number){
+    const url = this.BASE_URL + '/' + id;
+    return this.http.get(url,{headers: {'X-Auth-Token':'e756a53ce2f342d0ae4f46507438ba63'}}).pipe(map((response: any) => {
+      return Team.fromJson(response);
+    }));
+
   }
 
-  generateTeam(id:number):Team{
-    return this.team;
-  }
 }

@@ -1,2 +1,2 @@
 # FinconsProjectChampions
-Progetto di fine Academy membri gruppo : Leonardo Caricola , Alessio Losi
+Progetto di fine Academy : Leonardo Caricola

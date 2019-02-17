@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Match } from '../models/match';
+import { HttpClient } from '@angular/common/http';
+import {  map } from 'rxjs/operators';
+import { Stat } from '../models/matchStats';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MatchService {
 
+  constructor( private http:HttpClient) { }
 
-  match: Match = new Match(1,"boh","2019","lalala","finished",null,3,"non lo so","33-02","finale","Catania","Bari","3-0");
+  BASE_URL : string='https://api.football-data.org/v2/matches';
 
+  getMatchInfo(id: number){
+    const url = this.BASE_URL + '/' + id;
+    return this.http.get(url,{headers: {'X-Auth-Token':'e756a53ce2f342d0ae4f46507438ba63'}}).pipe(map((response: any) => {
+      return Stat.fromJson(response);
+    }));
 
-  constructor() { }
-
-  getSingleMatch(){
-    //METODO GET PER OTTENERE IL MATCH DA VISUALIZZARE
   }
 
-  generateSingleMatch(id: number): Match{
 
-    return this.match;
-  }
+
 }

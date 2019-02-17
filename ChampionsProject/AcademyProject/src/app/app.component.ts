@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PlayerService } from './services/player.service';
+import { Player } from './models/player';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AcademyProject';
+
+  constructor(){
+
+
+
+
+  }
+
 }
